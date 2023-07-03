@@ -96,7 +96,7 @@
 
 
 (comment
-  (calificar [5])
+  (calificar [6])
 
   (cond
          (<= nota 4) (str nota ", Reprobado")
