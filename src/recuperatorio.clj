@@ -57,9 +57,18 @@
 ;;    Complete la función de abajo para que realice correctamente esta tarea. (valor 5pts)
 ;;    NOTA: Revise el texto de los tests para verificar cómo queda la respuesta completa en cada caso. 
 
-(defn deriva
-  [codigo]
-  "El paciente ")
+(defn deriva [codigo]
+  (cond
+    (= codigo 1) (str "El paciente fue derivado a su médico de la obra social")
+    (= codigo 2) (str "El paciente fue derivado a su médico particular")
+    (= codigo 3) (str "El paciente fue derivado a su médico de cabecera")
+    (= codigo 4) (str "El paciente fue derivado a Consultorios Externos del Sanatorio")
+    (= codigo 5) (str "El paciente continúa tratamiento indicado previamente")
+    (= codigo 6) (str "El paciente fue derivado a Internación")
+    (= codigo 7) (str "El paciente ha fallecido")
+    (= codigo 8) (str "El paciente fue derivado a otro Sanatorio")
+    (= codigo 9) (str "El paciente fue derivado al Geriátrico")
+    :else "Código de derivación incorrecto"))
 
 
 ;; 2. Ayudemos a un profesor de secundaria a pasar el acta final de notas. Recibirá un vector con las calificaciones.
@@ -72,7 +81,27 @@
 ;;    "Datos incorrectos. Debe ingresar un vector numérico"
 ;;    (5pts)
 
-(defn calificar
-  [calificaciones]
-  [])
+(defn calificar [calificaciones]
+  (if (and (vector? calificaciones) (every? number? calificaciones))
+    (let [valid_calificaciones (filter #(and (>= % 0) (<= % 10)) calificaciones)]
+      (mapv
+       (fn [nota]
+         (cond
+           (<= nota 4) (str nota ", Reprobado")
+           (and (<= nota 7) (> nota 4)) (str nota ", Aprobado, Va a finales")
+           (> nota 7) (str nota ", Aprobado, Eximido")))
+       valid_calificaciones))
+    "Datos incorrectos. Debe ingresar un vector numérico"))
 
+
+
+(comment
+  (calificar [5])
+
+  (cond
+         (<= nota 4) (str nota ", Reprobado")
+         (and (<= nota 7) (> nota 4)) (str nota ", Aprobado, Va a finales")
+         (> nota 7) (str nota ", Aprobado, Eximido")))
+      valid_calificaciones))
+    "Datos incorrectos. Debe ingresar un vector numérico"))
+  )
